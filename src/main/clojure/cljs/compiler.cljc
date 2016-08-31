@@ -1303,7 +1303,9 @@
                              opts)
                       ret  (emit-source src dest ext opts)]
                   (.setLastModified ^File dest (util/last-modified src))
-                  ret)))))))))
+                  (if (contains? opts :plugin)
+                    ((:plugin opts) ret)
+                    ret))))))))))
 
 #?(:clj
    (defn requires-compilation?
